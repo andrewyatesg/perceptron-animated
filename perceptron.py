@@ -12,6 +12,10 @@ class Perceptron():
         self.testing_set = testing_set
 
         fig, ax = plt.subplots()
+
+        ax.set_xlim((-1, 1))
+        ax.set_ylim((-1, 1))
+
         self.fig = fig
         self.ax = ax
 

@@ -20,7 +20,7 @@ class Perceptron():
         self.ax = ax
 
         if weights is None:
-            self.weights = np.array([[0., 0., 0.]]).T
+            self.weights = np.array([[random.uniform(-1, 1), random.uniform(-1, 1), random.uniform(-1, 1)]]).T
         else:
             self.weights = weights
 
@@ -57,18 +57,12 @@ class Perceptron():
         x1, y1 = self.point1
         x2, y2 = self.point2
         slope = (y2 - y1) / (x2 - x1)
-        self.ax.plot([np.amin(xs), np.amax(xs)], slope * (np.array([np.amin(xs), np.amax(xs)]) - x1) + y1, "g")
+        self.ax.plot([-1, 1], slope * (np.array([-1, 1]) - x1) + y1, "g")
 
         # Graph the testing set as a scatterplot
         self.ax.scatter(xs, ys)
 
     def animate(self):
-        # training data
-        x = np.array([i[1] for i in self.training_set])
-
-        minX = np.amin(x)
-        maxX = np.amax(x)
-
         line, = self.ax.plot([], [], lw=2)
 
         self.test_data = True # Flag for printing test error, after finished animating
@@ -103,7 +97,7 @@ class Perceptron():
                     self.test_data = False
 
             # Updates line based on updated weights
-            lineDom = np.linspace(minX, maxX)
+            lineDom = np.linspace(-1, 1)
             line.set_data(lineDom, (-self.weights[1] * lineDom - self.weights[0]) / self.weights[2])
 
             return line,
@@ -115,9 +109,9 @@ def test_run(data_size, testing_size):
     training_size = data_size
 
     training_set = [[1., random.uniform(-1, 1), random.uniform(-1, 1)]
-                    for i in range(training_size)]
+                    for _ in range(training_size)]
     testing_set = [[1., random.uniform(-1, 1), random.uniform(-1, 1)]
-                   for i in range(testing_size)]
+                   for _ in range(testing_size)]
 
     pla = Perceptron(training_set=training_set, testing_set=testing_set)
 

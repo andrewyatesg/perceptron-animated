@@ -64,6 +64,7 @@ class Perceptron():
 
     def animate(self):
         line, = self.ax.plot([], [], lw=2)
+        line.set_c("r")
 
         self.test_data = True # Flag for printing test error, after finished animating
 

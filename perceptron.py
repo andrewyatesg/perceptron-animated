@@ -100,7 +100,7 @@ class Perceptron():
 
             # Updates line based on updated weights
             lineDom = np.linspace(minX, maxX)
-            line.set_data(lineDom, [(-self.weights[1] * i - self.weights[0]) / self.weights[2] for i in lineDom])
+            line.set_data(lineDom, (-self.weights[1] * lineDom - self.weights[0]) / self.weights[2])
 
             return line,
 
